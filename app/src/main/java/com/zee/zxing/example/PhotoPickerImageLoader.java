@@ -21,7 +21,7 @@ public class PhotoPickerImageLoader implements ImageLoader {
 
     @Override
     public void displayImagePreview(Activity activity, String path, ImageView imageView, int width, int height) {
-
+        Glide.with(activity).load(path).into(imageView);
     }
 
     @Override

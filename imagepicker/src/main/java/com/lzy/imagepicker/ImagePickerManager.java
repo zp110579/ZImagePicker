@@ -1,63 +1,48 @@
 package com.lzy.imagepicker;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 
-import com.lzy.imagepicker.bean.ZImagePickerListener;
+import com.lzy.imagepicker.bean.CameraPickerImageSelectManager;
+import com.lzy.imagepicker.bean.PhotoPickerImageSelectManager;
+import com.lzy.imagepicker.bean.OnImagePickerListener;
 
 public class ImagePickerManager {
     private Activity mActivity;
-    private ZImagePickerListener mZImagePickerListener;
-    private int type = 0; //0：矩形 1：圆形
 
-    /**
-     * 矩形截图
-     *
-     * @return
-     */
-    public static ImagePickerManager newRectangleImagePickerManager() {
-        ImagePickerManager fragment = new ImagePickerManager();
-        return fragment;
+
+    public ImagePickerManager(Activity activity) {
+        this.mActivity = activity;
     }
 
     /**
-     * 圆形截图
+     * 图库里选择图片
      *
      * @return
      */
-    public static ImagePickerManager newCircleImagePickerManager() {
-        ImagePickerManager fragment = new ImagePickerManager();
-        fragment.setType(1);
-        return fragment;
+    public PhotoPickerImageSelectManager newPhotoPickerImageSelectManager() {
+        return new PhotoPickerImageSelectManager(mActivity);
     }
 
-    private void setType(int type) {
-        this.type = type;
+    /**
+     * 像机直接拍摄
+     *
+     * @return
+     */
+    public CameraPickerImageSelectManager newCameraPickerImageSelectManager() {
+        return new CameraPickerImageSelectManager(mActivity);
     }
 
-    public ImagePickerManager with(Activity activity) {
-        mActivity = activity;
-        return this;
+    public static ImagePickerManager with(Activity activity) {
+        return new ImagePickerManager(activity);
     }
 
-    public ImagePickerManager with(Fragment fragment) {
-        mActivity = fragment.getActivity();
-        return this;
+    public static ImagePickerManager with(Fragment fragment) {
+        return new ImagePickerManager(fragment.getActivity());
     }
 
-    public ImagePickerManager with(DialogFragment dialogFragment) {
-        mActivity = dialogFragment.getActivity();
-        return this;
-    }
-
-    public ImagePickerManager setZImagePickerListener(ZImagePickerListener ZImagePickerListener) {
-        mZImagePickerListener = ZImagePickerListener;
-        return this;
-    }
-
-    public void letGo() {
-
+    public static ImagePickerManager with(DialogFragment dialogFragment) {
+        return new ImagePickerManager(dialogFragment.getActivity());
     }
 }
