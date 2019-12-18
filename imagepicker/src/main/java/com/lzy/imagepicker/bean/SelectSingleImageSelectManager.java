@@ -3,7 +3,7 @@ package com.lzy.imagepicker.bean;
 import android.app.Activity;
 
 import com.lzy.imagepicker.ImagePicker;
-import com.lzy.imagepicker.ui.ZxingResultFragment;
+import com.lzy.imagepicker.ui.ImagePickerFragment;
 import com.lzy.imagepicker.view.CropImageView;
 
 /**
@@ -62,7 +62,7 @@ public class SelectSingleImageSelectManager {
 
 
     public void letsGo(OnImagePickerListener onImagePickerListener) {
-        ZxingResultFragment zxingResultFragment = ZxingResultFragment.newInstant(false);
-        zxingResultFragment.prepareRequest(mActivity, onImagePickerListener);
+        ImagePickerFragment imagePickerFragment = ImagePickerFragment.newInstant(false);
+        imagePickerFragment.prepareRequest(mActivity, onImagePickerListener);
     }
 }

@@ -44,8 +44,8 @@ import java.util.List;
  * 2017-03-17
  *
  * @author nanchen
- *         新增可直接传递是否裁剪参数，以及直接拍照
- *         ================================================
+ * 新增可直接传递是否裁剪参数，以及直接拍照
+ * ================================================
  */
 public class ImageGridActivity extends ImageBaseActivity implements ImageDataSource.OnImagesLoadedListener, OnImageItemClickListener, ImagePicker.OnImageSelectedListener, View.OnClickListener {
 
@@ -331,6 +331,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
             //如果是裁剪，因为裁剪指定了存储的Uri，所以返回的data一定为null
             if (resultCode == RESULT_OK && requestCode == ImagePicker.REQUEST_CODE_TAKE) {
                 //发送广播通知图片增加了
+                Log.i("tag", imagePicker.getTakeImageFile().toString());
                 ImagePicker.galleryAddPic(this, imagePicker.getTakeImageFile());
 
                 /**

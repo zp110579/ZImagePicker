@@ -6,7 +6,7 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 import com.lzy.imagepicker.ImagePicker;
-import com.lzy.imagepicker.ui.ZxingResultFragment;
+import com.lzy.imagepicker.ui.ImagePickerFragment;
 import com.lzy.imagepicker.view.CropImageView;
 
 public class CameraPickerImageSelectManager {
@@ -61,7 +61,7 @@ public class CameraPickerImageSelectManager {
     }
 
     public void letsGo(OnImagePickerListener onImagePickerListener) {
-        ZxingResultFragment zxingResultFragment = ZxingResultFragment.newInstant(true);
-        zxingResultFragment.prepareRequest(mActivity, onImagePickerListener);
+        ImagePickerFragment imagePickerFragment = ImagePickerFragment.newInstant(true);
+        imagePickerFragment.prepareRequest(mActivity, onImagePickerListener);
     }
 }

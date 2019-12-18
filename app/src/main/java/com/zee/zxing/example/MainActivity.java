@@ -13,6 +13,7 @@ import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
 import com.zee.log.ZLog;
 import com.zee.utils.ZLibrary;
+import com.zee.utils.ZScreenUtils;
 
 import java.util.ArrayList;
 
@@ -32,37 +33,28 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.scanBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImagePickerManager.with(MainActivity.this).newCameraPickerImageSelectManager().setRectangleEdit().letsGo(new OnImagePickerListener() {
+                ImagePickerManager.with(MainActivity.this).newPhotoPickerImageSelectManager().singleMode().setRectangleEditSize(ZScreenUtils.getScreenWidth(), ZScreenUtils.getScreenWidth()).letsGo(new OnImagePickerListener() {
                     @Override
                     public void onImagePickerResult(ArrayList<ImageItem> imageItemArrayList) {
                         ZLog.i(imageItemArrayList);
                     }
                 });
-
-//                Intent intent1 = new Intent(MainActivity.this, ImageGridActivity.class);
-//                startActivityForResult(intent1, 0);
             }
         });
 
         findViewById(R.id.encodeBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImagePickerManager.with(MainActivity.this).newPhotoPickerImageSelectManager().manyMode(4).letsGo(new OnImagePickerListener() {
+                ImagePickerManager.with(MainActivity.this).newCameraPickerImageSelectManager().setRectangleEdit().letsGo(new OnImagePickerListener() {
                     @Override
                     public void onImagePickerResult(ArrayList<ImageItem> imageItemArrayList) {
                         ZLog.i(imageItemArrayList);
                     }
                 });
-
-//                Intent intent = new Intent(MainActivity.this, ImageGridActivity.class);
-//                intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, true); // 是否是直接打开相机
-//                startActivityForResult(intent, 1);
-
             }
         });
         initSelectPic();
     }
-
 
     private void initSelectPic() {
         //设置头像相关
