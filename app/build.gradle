@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.yzq.zxing"
+        applicationId "com.zee.imagerpicker"
         minSdkVersion min_sdk_version
         targetSdkVersion 28
         versionCode 1

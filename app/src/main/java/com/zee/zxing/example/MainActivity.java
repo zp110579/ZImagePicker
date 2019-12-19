@@ -9,7 +9,7 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.ImagePickerManager;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.bean.OnImagePickerListener;
-import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
 import com.lzy.imagepicker.view.CropImageView;
 import com.zee.log.ZLog;
 import com.zee.utils.ZLibrary;
@@ -27,16 +27,26 @@ public class MainActivity extends AppCompatActivity {
         initView();
     }
 
-
     private void initView() {
         /*扫描按钮*/
         findViewById(R.id.scanBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImagePickerManager.with(MainActivity.this).newPhotoPickerImageSelectManager().singleMode().setRectangleEditSize(ZScreenUtils.getScreenWidth(), ZScreenUtils.getScreenWidth()).letsGo(new OnImagePickerListener() {
+                ImagePickerManager.with(MainActivity.this).singleSelectImage().setRectangleEditSize(ZScreenUtils.getScreenWidth(), ZScreenUtils.getScreenWidth()).letsGo(new OnImagePickerListener() {
                     @Override
                     public void onImagePickerResult(ArrayList<ImageItem> imageItemArrayList) {
                         ZLog.i(imageItemArrayList);
+                    }
+                });
+            }
+        });
+        findViewById(R.id.scanBtn_many).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImagePickerManager.with(MainActivity.this).manySelectImages(4).letsGo(new OnImagePickerListener() {
+                    @Override
+                    public void onImagePickerResult(ArrayList<ImageItem> imageItemArrayList) {
+                        ZLog.i(imageItemArrayList + "");
                     }
                 });
             }
@@ -45,12 +55,19 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.encodeBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImagePickerManager.with(MainActivity.this).newCameraPickerImageSelectManager().setRectangleEdit().letsGo(new OnImagePickerListener() {
+                ImagePickerManager.with(MainActivity.this).cameraImage().setRectangleEdit().letsGo(new OnImagePickerListener() {
                     @Override
                     public void onImagePickerResult(ArrayList<ImageItem> imageItemArrayList) {
                         ZLog.i(imageItemArrayList);
                     }
                 });
+            }
+        });
+        findViewById(R.id.delete_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ImagePreviewDelActivity.class);
+                startActivity(intent);
             }
         });
         initSelectPic();

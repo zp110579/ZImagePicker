@@ -5,8 +5,8 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 
 import com.lzy.imagepicker.bean.CameraPickerImageSelectManager;
-import com.lzy.imagepicker.bean.PhotoPickerImageSelectManager;
-import com.lzy.imagepicker.bean.OnImagePickerListener;
+import com.lzy.imagepicker.bean.ManyImageSelectManager;
+import com.lzy.imagepicker.bean.SingleImageSelectManager;
 
 public class ImagePickerManager {
     private Activity mActivity;
@@ -17,12 +17,21 @@ public class ImagePickerManager {
     }
 
     /**
-     * 图库里选择图片
+     * 图库里单个图片选择
      *
      * @return
      */
-    public PhotoPickerImageSelectManager newPhotoPickerImageSelectManager() {
-        return new PhotoPickerImageSelectManager(mActivity);
+    public SingleImageSelectManager singleSelectImage() {
+        return new SingleImageSelectManager(mActivity);
+    }
+
+    /**
+     * 图库里多个图片选择
+     *
+     * @return
+     */
+    public ManyImageSelectManager manySelectImages(int selectLimit) {
+        return new ManyImageSelectManager(mActivity, selectLimit);
     }
 
     /**
@@ -30,7 +39,7 @@ public class ImagePickerManager {
      *
      * @return
      */
-    public CameraPickerImageSelectManager newCameraPickerImageSelectManager() {
+    public CameraPickerImageSelectManager cameraImage() {
         return new CameraPickerImageSelectManager(mActivity);
     }
 

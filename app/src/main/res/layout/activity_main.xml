@@ -6,39 +6,34 @@
     android:orientation="vertical"
     tools:context="com.zee.zxing.example.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
-
-        </android.support.v7.widget.Toolbar>
-
-    </android.support.design.widget.AppBarLayout>
-
-
     <Button
         android:id="@+id/scanBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="相册选择" />
+        android:text="单个图片选择(相册)" />
 
-    <View
-        android:id="@+id/contentEt"
+    <Button
+        android:id="@+id/scanBtn_many"
+        android:autoSizeMaxTextSize="20dp"
         android:layout_width="match_parent"
-        android:layout_height="56dp" />
-
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="多个图片选择(相册)" />
 
     <Button
         android:id="@+id/encodeBtn"
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="相机" />
+
+    <Button
+        android:id="@+id/delete_image"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="删除图片" />
 
 
 </LinearLayout>

@@ -69,7 +69,6 @@ public class ImagePicker {
     private CropImageView.Style style = CropImageView.Style.RECTANGLE; //裁剪框的形状
     private File cropCacheFolder;
     private File takeImageFile;
-    public Bitmap cropBitmap;
 
     private ArrayList<ImageItem> mSelectedImages = new ArrayList<>();   //选中的图片集合
     private List<ImageFolder> mImageFolders;      //所有的图片文件夹
@@ -136,17 +135,11 @@ public class ImagePicker {
         return outPutX;
     }
 
-    public void setOutPutX(int outPutX) {
-        this.outPutX = outPutX;
-    }
 
     public int getOutPutY() {
         return outPutY;
     }
 
-    public void setOutPutY(int outPutY) {
-        this.outPutY = outPutY;
-    }
     public void setOutPutSize(int outPutX, int outPutY) {
         this.outPutX = outPutX;
         this.outPutY = outPutY;
@@ -156,22 +149,16 @@ public class ImagePicker {
         return focusWidth;
     }
 
-    public void setFocusWidth(int focusWidth) {
-        this.focusWidth = focusWidth;
-    }
-
 
     public int getFocusHeight() {
         return focusHeight;
     }
 
-    public void setFocusHeight(int focusHeight) {
-        this.focusHeight = focusHeight;
-    }
-
     public void setFocusSize(int focusWidth, int focusHeight) {
         this.focusWidth = focusWidth;
         this.focusHeight = focusHeight;
+        //设置默认的输出的宽和高
+        setOutPutSize(focusWidth, focusHeight);
     }
 
     public File getTakeImageFile() {

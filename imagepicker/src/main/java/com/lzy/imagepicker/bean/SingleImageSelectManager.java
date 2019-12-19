@@ -9,12 +9,12 @@ import com.lzy.imagepicker.view.CropImageView;
 /**
  * 单个图片的选择
  */
-public class SelectSingleImageSelectManager {
+public class SingleImageSelectManager {
     private Activity mActivity;
 
     ImagePicker imagePicker = ImagePicker.getInstance();
 
-    public SelectSingleImageSelectManager(Activity activity) {
+    public SingleImageSelectManager(Activity activity) {
         mActivity = activity;
         imagePicker.setShowCamera(false);
         imagePicker.setMultiMode(false);
@@ -24,13 +24,13 @@ public class SelectSingleImageSelectManager {
     /**
      * 是否在第一个位置显示照相机的图片
      */
-    public SelectSingleImageSelectManager setShowCamera() {
+    public SingleImageSelectManager setShowCameraFirst() {
         imagePicker.setShowCamera(true);
         return this;
     }
 
 
-    public SelectSingleImageSelectManager setMultiMode() {
+    public SingleImageSelectManager setMultiMode() {
         imagePicker.setMultiMode(true);
         return this;
     }
@@ -40,7 +40,7 @@ public class SelectSingleImageSelectManager {
      *
      * @return
      */
-    public SelectSingleImageSelectManager setRectangleEditSize(int width, int height) {
+    public SingleImageSelectManager setRectangleEditSize(int width, int height) {
         imagePicker.setFocusSize(width, height);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
         imagePicker.setCrop(true);//设置选择后可以编辑
         imagePicker.setSaveRectangle(true); //是否按矩形区域保存
@@ -52,7 +52,7 @@ public class SelectSingleImageSelectManager {
      *
      * @return
      */
-    public SelectSingleImageSelectManager setCircleEditSize(int width) {
+    public SingleImageSelectManager setCircleEditSize(int width) {
         imagePicker.setFocusSize(width, width);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
         imagePicker.setCrop(true);//设置选择后可以编辑
         imagePicker.setStyle(CropImageView.Style.CIRCLE);  //裁剪框的形状

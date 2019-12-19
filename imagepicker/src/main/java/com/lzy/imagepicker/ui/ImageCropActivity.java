@@ -27,13 +27,12 @@ import java.util.ArrayList;
  * 修订历史：
  * ================================================
  */
-public class ImageCropActivity extends ImageBaseActivity implements View.OnClickListener, CropImageView.OnBitmapSaveCompleteListener {
+public class ImageCropActivity extends ImageBaseActivity implements CropImageView.OnBitmapSaveCompleteListener {
 
     private CropImageView mCropImageView;
     private Bitmap mBitmap;
     private boolean mIsSaveRectangle;
-    private int mOutputX;
-    private int mOutputY;
+
     private ArrayList<ImageItem> mImageItems;
     private ImagePicker imagePicker;
 
@@ -45,25 +44,34 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
         imagePicker = ImagePicker.getInstance();
 
         //初始化View
-        findViewById(R.id.btn_back).setOnClickListener(this);
-        Button btn_ok = (Button) findViewById(R.id.btn_ok);
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_CANCELED);
+                finish();
+            }
+        });
+        Button btn_ok = findViewById(R.id.btn_ok);
         btn_ok.setText(getString(R.string.ip_complete));
-        btn_ok.setOnClickListener(this);
-        TextView tv_des = (TextView) findViewById(R.id.tv_des);
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCropImageView.saveBitmapToFile(imagePicker.getCropCacheFolder(ImageCropActivity.this), imagePicker.getOutPutX(), imagePicker.getOutPutY(), mIsSaveRectangle);
+            }
+        });
+
+        TextView tv_des = findViewById(R.id.tv_des);
         tv_des.setText(getString(R.string.ip_photo_crop));
-        mCropImageView = (CropImageView) findViewById(R.id.cv_crop_image);
+        mCropImageView = findViewById(R.id.cv_crop_image);
         mCropImageView.setOnBitmapSaveCompleteListener(this);
 
         //获取需要的参数
-        mOutputX = imagePicker.getOutPutX();
-        mOutputY = imagePicker.getOutPutY();
         mIsSaveRectangle = imagePicker.isSaveRectangle();
         mImageItems = imagePicker.getSelectedImages();
         String imagePath = mImageItems.get(0).path;
 
         mCropImageView.setFocusStyle(imagePicker.getStyle());
-        mCropImageView.setFocusWidth(imagePicker.getFocusWidth());
-        mCropImageView.setFocusHeight(imagePicker.getFocusHeight());
+        mCropImageView.setFocusSize(imagePicker.getFocusWidth(), imagePicker.getFocusHeight());
 
         //缩放图片
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -92,17 +100,6 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
             }
         }
         return inSampleSize;
-    }
-
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        if (id == R.id.btn_back) {
-            setResult(RESULT_CANCELED);
-            finish();
-        } else if (id == R.id.btn_ok) {
-            mCropImageView.saveBitmapToFile(imagePicker.getCropCacheFolder(this), mOutputX, mOutputY, mIsSaveRectangle);
-        }
     }
 
     @Override
